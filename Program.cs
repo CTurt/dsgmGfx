@@ -1006,22 +1006,25 @@ namespace PAGfx.Main {
 					int tile = -1;
 					Pos = x + (y * swidth);
 
-					HFlip = 0; VFlip = 0; // No flip first
-					tile = CompareNorm(Pos, buffer[Pos]);
-					if((tile == -1) && (Background.BgMode != 3) && (Background.BgMode != 7) && (Background.BgMode != 8) && (Background.BgMode != 9)) // Flip inactivated for rotbg and fonts...
+					if (Background.BgMode != 7)
                     {
-						HFlip = 1; VFlip = 0; // Now we'll test for HFlip
-						tile = CompareHFlip(Pos, buffer[Pos]);
-						if(tile == -1) {
-							HFlip = 0; VFlip = 1;
-							tile = CompareVFlip(Pos, buffer[Pos]);
+						HFlip = 0; VFlip = 0; // No flip first
+						tile = CompareNorm(Pos, buffer[Pos]);
+						if((tile == -1) && (Background.BgMode != 3) && (Background.BgMode != 7) && (Background.BgMode != 8) && (Background.BgMode != 9)) // Flip inactivated for rotbg and fonts...
+						{
+							HFlip = 1; VFlip = 0; // Now we'll test for HFlip
+							tile = CompareHFlip(Pos, buffer[Pos]);
 							if(tile == -1) {
-								HFlip = 1; VFlip = 1;
-								tile = CompareHVFlip(Pos, buffer[Pos]);
+								HFlip = 0; VFlip = 1;
+								tile = CompareVFlip(Pos, buffer[Pos]);
+								if(tile == -1) {
+									HFlip = 1; VFlip = 1;
+									tile = CompareHVFlip(Pos, buffer[Pos]);
+								}
 							}
 						}
-
 					}
+
 					if(tile == -1) // new tile...
                     {
 						tile = AddNewTile(Pos, pixel);
