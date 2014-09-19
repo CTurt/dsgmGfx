@@ -1552,11 +1552,12 @@ namespace PAGfx.Main {
 			Log = new FileStream("PAGfx.log", FileMode.Create); // Créé le fichier
 			LogWriter = new BinaryWriter(Log);  // Permet d'écrire dedans
 
-			PAGfxWrite("dsgmGfx fork of PAGfx Converter " + verstring + " -- originally by Mollusk & fincs -- customised by DSGM team\r\n");
+            PAGfxWrite("dsgmGfx fork of PAGfx Converter " + verstring + " -- originally by Mollusk & fincs\r\n");
+            PAGfxWrite("customised by DSGM team\r\n");
+            PAGfxWrite("http://www.dsgamemaker.com/\r\n\n");
 #if VER_MONO
 			PAGfxWrite("Mono version\r\n");
 #endif
-			PAGfxWrite("http://www.dsgamemaker.com/\r\n\n");
 
 			PAGfxWrite(string.Format("Converting {0}\r\n", FileName));
 			string res = LoadINI.IniParse(FileName);
